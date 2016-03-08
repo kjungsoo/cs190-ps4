@@ -36,8 +36,20 @@ func anyPower(n: Int) -> (Int->Int) {
     return nthPower
 }
 
+/*
 func raiseArrayToPower(n: Int, arrayOfInts: [Int]) -> [Int] {
-    return [1, 5] // a meaningless hard-coded implementation for you to replace with an actual implementation
+    let nthpower = anyPower(n)
+    var raisedArray: [Int] = []
+    for numbers in 0 ..< arrayOfInts.count {
+        raisedArray.append(nthpower(arrayOfInts[numbers]))
+    }
+    return raisedArray
+} */
+
+func raiseArrayToPower(n: Int, arrayOfInts: [Int]) -> [Int] {
+    let nthpower = anyPower(n)
+    let raisedArray = arrayOfInts.map(nthpower)
+    return raisedArray
 }
 
 /*:
@@ -47,7 +59,8 @@ Implement the following function using filter. When you have it implemented righ
 */
 
 func keepOnlyEvenValues(arrayOfInts: [Int]) -> [Int] {
-    return [1, 5] // a meaningless hard-coded implementation for you to replace with an actual implementation
+    let filteredArray = arrayOfInts.filter { value in value % 2 == 0 }
+    return filteredArray
 }
 
 /*:
@@ -68,7 +81,10 @@ let thisMonthsRentals = [
 ]
 
 func totalRentalHours(rentals: [CarRental]) -> Double {
-    return 5.0 // a meaningless hard-coded implementation for you to replace with an actual implementation
+    var total: Double = 0.0
+    let balanceForward = 49.76
+    total = thisMonthsRentals.reduce(balanceForward) {total, rental in total + rental.price}
+    return total
 }
 
 import XCTest
